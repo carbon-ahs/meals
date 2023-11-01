@@ -12,37 +12,34 @@ class CatagoriesScreen extends StatelessWidget {
     //Navigator.push(context, route);
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) =>
-            MealsScreen(title: category.title, meals: dummyMeals),
+        builder: (context) => MealsScreen(
+          title: category.title,
+          meals: dummyMeals,
+        ),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Pick your catagory'),
+    return GridView(
+      padding: EdgeInsets.all(16),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 3 / 2,
+        crossAxisSpacing: 20,
+        mainAxisSpacing: 20,
       ),
-      body: GridView(
-        padding: EdgeInsets.all(16),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 3 / 2,
-          crossAxisSpacing: 20,
-          mainAxisSpacing: 20,
-        ),
-        children: [
-          // availableCategories.map((category) => CatagoryGridItem(category: category)).toList();
-          for (final category in availableCategories)
-            CatagoryGridItem(
-              category: category,
-              onSelectCategory: () {
-                _selectCategory(context, category);
-              },
-            )
-        ],
-      ),
+      children: [
+        // availableCategories.map((category) => CatagoryGridItem(category: category)).toList();
+        for (final category in availableCategories)
+          CatagoryGridItem(
+            category: category,
+            onSelectCategory: () {
+              _selectCategory(context, category);
+            },
+          )
+      ],
     );
   }
 }
